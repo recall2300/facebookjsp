@@ -31,12 +31,18 @@
 	margin-top: 15%;
 }
 </style>
-<title>헤더 페이지</title>
+<title>기본 페이지</title>
 <script>
 function oauth_page() {
-    window.location.href = '<%=url%>'
+    location.href = '<%=url%>';
 }
-console.log("accesstoken : "+ "<%= (String)session.getAttribute("accessToken")%>");
+function oauth_page_twitter() {
+    location.href = "/OAuth/twitter_access.jsp";
+}
+console.log("FaccessToken : "+ "<%= (String)session.getAttribute("accessToken")%>");
+console.log("TaccessToken : "+ "<%= (String)session.getAttribute("TaccessToken")%>");
+console.log("TaccessTokenSecret : "+ "<%= (String)session.getAttribute("TaccessTokenSecret")%>");
+console.log("login_check : "+ "<%= (String)session.getAttribute("LOGIN") %>");
 function logout_page(){
 	location.href = "/OAuth/logout.jsp";
 }
@@ -45,16 +51,34 @@ function logout_page(){
 <body>
 	<!--  // include file="/WEB-INF/include/facebookoauth.jspf" -->
 	<%
-	String accessToken = (String)session.getAttribute("accessToken");
+	String login_check = (String)session.getAttribute("LOGIN");
 	%>
 
 
 
 	<!-- http://bootstrapk.com/javascript/#modals -->
 	<div class="container">
-		<h2>인증창 예제</h2>
+		<div class="row">
+		    <div class="col-sm-9">
+		      
+		    </div>
+		    <div class="col-sm-2">
+		     <%
+		      if(login_check != null){
+		
+	%>
+		<p>님 환영합니다^^</p>
 		<%
-	if(accessToken != null){
+	}
+	else{
+		
+	}
+	
+	%>
+		    </div>
+		    <div class="col-sm-1">
+		      <%
+	if(login_check != null){
 		
 	%>
 		<button type="button" class="btn btn-info btn-lg" onclick="logout_page()">Logout</button>
@@ -67,11 +91,12 @@ function logout_page(){
 		<%
 	}
 	
-	%><!-- Trigger the modal with a button -->
-
-
-
-
+	%>
+	<!-- Trigger the modal with a button -->
+		    </div>
+		  </div>
+		
+	
 		<!-- Modal -->
 		<div class="modal fade" id="myModal" role="dialog">
 
@@ -89,20 +114,22 @@ function logout_page(){
 							<div class="col-sm-4">
 								<a href="#" onclick="oauth_page()"> <img
 									class="img-responsive" src="img/facebook_icon.png"
-									/ width="100" height="100"
+									 width="100" height="100"
 									style="margin-right: auto; margin-left: auto;">
 									<p style="text-align: center">페이스북</p>
 								</a>
 							</div>
 							<div class="col-sm-4">
+								<a href="#" onclick="oauth_page_twitter()">
 								<img class="img-responsive" src="img/twitter_icon.png"
-									/ width="100" height="100"
+									 width="100" height="100"
 									style="margin-right: auto; margin-left: auto;">
 								<p style="text-align: center">트위터</p>
+								</a>
 							</div>
 							<div class="col-sm-4">
 								<img class="img-responsive" src="img/payco_icon.jpg"
-									/ width="100" height="100"
+									 width="100" height="100"
 									style="margin-right: auto; margin-left: auto;">
 								<p style="text-align: center">페이코</p>
 							</div>

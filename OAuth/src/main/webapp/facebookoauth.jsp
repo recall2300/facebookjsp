@@ -8,6 +8,7 @@
 <%@ page import="java.io.*"%>
 <%@ page import="org.json.*" %>
 <%
+
     String appKey        = (String)session.getAttribute("appKey");
     String appSecret     = (String)session.getAttribute("appSecret");
 
@@ -16,7 +17,7 @@
     String error             = request.getParameter("error");
     String errorDescription = request.getParameter("error_description");
     
-    String accesstoken = "";
+    String accessToken = "";
     String result       = "";
 
     if( StringUtils.isNotEmpty(code) ) {
@@ -29,16 +30,17 @@
 		DefaultHttpClient http = new DefaultHttpClient();
         result = http.execute(get, new BasicResponseHandler());
         
-        accesstoken = result.substring(result.indexOf("=")+1);
+        accessToken = result.substring(result.indexOf("=")+1);
         System.out.println(result);
-        session.setAttribute("accessToken", accesstoken);
+        session.setAttribute("accessToken", accessToken);
+        session.setAttribute("LOGIN", "F");
     }
     
   //https://graph.facebook.com/me?fields=id,name,email,gender,cover,picture&access_token=CAANyORh9zsYBAPtnYY53x0OVTBcULMAA8jZAws8LdNUr5u0xMnnjQH2m8WbimknflHwQ1U7pTnTNCVZBv8pzOzxr6BFDD2E3kaZACOZCSA41wMahSljgCJmcqHN2KOOtj33er0IGruzciWeBgxMdWO9FZA97fgSwdnCUrfpaWo6xjCITO7QvRtezQO26WTzkZD&expires=5183804
     URL url = null;
     URLConnection urlConnection = null;
     String sUrl = "https://graph.facebook.com/me?fields=id,name,email,gender,cover,picture&access_token=";
-    url = new URL(sUrl + accesstoken);
+    url = new URL(sUrl + accessToken);
     urlConnection = url.openConnection();
     
         InputStream ist = urlConnection.getInputStream();
