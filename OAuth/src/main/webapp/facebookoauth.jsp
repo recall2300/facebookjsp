@@ -30,8 +30,10 @@
         result = http.execute(get, new BasicResponseHandler());
         
         accesstoken = result.substring(result.indexOf("=")+1);
+        System.out.println(result);
         session.setAttribute("accessToken", accesstoken);
     }
+    
   //https://graph.facebook.com/me?fields=id,name,email,gender,cover,picture&access_token=CAANyORh9zsYBAPtnYY53x0OVTBcULMAA8jZAws8LdNUr5u0xMnnjQH2m8WbimknflHwQ1U7pTnTNCVZBv8pzOzxr6BFDD2E3kaZACOZCSA41wMahSljgCJmcqHN2KOOtj33er0IGruzciWeBgxMdWO9FZA97fgSwdnCUrfpaWo6xjCITO7QvRtezQO26WTzkZD&expires=5183804
     URL url = null;
     URLConnection urlConnection = null;
@@ -46,10 +48,10 @@
         String nextLine = br.readLine();
         JSONObject jObject  = new JSONObject(nextLine);
         System.out.println(jObject.getString("email"));
-        /* while (nextLine != null) {
-            System.out.println(nextLine);
-            nextLine = br.readLine();
-        } */
+        // while (nextLine != null) {
+            //System.out.println(nextLine);
+          //  nextLine = br.readLine();
+        //} 
     
     
 %>
